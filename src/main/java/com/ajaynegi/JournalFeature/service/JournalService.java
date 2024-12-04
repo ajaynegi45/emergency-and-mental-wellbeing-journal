@@ -2,7 +2,6 @@ package com.ajaynegi.JournalFeature.service;
 
 import com.ajaynegi.JournalFeature.model.Journal;
 import com.ajaynegi.JournalFeature.repository.JournalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Service
 public class JournalService {
 
-    @Autowired
-    private JournalRepository journalRepository;
+    private final JournalRepository journalRepository;
+
+    public JournalService(JournalRepository journalRepository) {
+        this.journalRepository = journalRepository;
+    }
 
     public List<Journal> getAllJournals() {
         return journalRepository.findAll();

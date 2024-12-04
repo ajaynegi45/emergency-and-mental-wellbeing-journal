@@ -2,7 +2,6 @@ package com.ajaynegi.JournalFeature.controller;
 
 import com.ajaynegi.JournalFeature.model.Journal;
 import com.ajaynegi.JournalFeature.service.JournalService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +15,12 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class JournalController {
 
-    @Autowired
-    private JournalService journalService;
+
+    private final JournalService journalService;
+
+    public JournalController(JournalService journalService) {
+        this.journalService = journalService;
+    }
 
     // Fetch all journals
     @GetMapping
