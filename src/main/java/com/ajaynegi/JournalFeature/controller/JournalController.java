@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/journals")
-//@CrossOrigin(origins = "http://localhost:5173")
 @CrossOrigin(origins = "*")
 public class JournalController {
 
@@ -44,15 +43,15 @@ public class JournalController {
         if (journal.getCreatedAt() == null) {
             journal.setCreatedAt(LocalDateTime.now());
         }
-        journal.setUserId(userId);  // Set userId from request header
+        journal.setUserId(userId);
         return ResponseEntity.ok(journalService.createJournal(journal));
     }
 
     // Delete a journal by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteJournal(@PathVariable String id) {
+    public ResponseEntity<String> deleteJournal(@PathVariable String id) {
         journalService.deleteJournal(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Journal deleted successfully.");
     }
 
     // Update a journal by ID
