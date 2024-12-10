@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class JournalService {
@@ -16,9 +17,26 @@ public class JournalService {
         this.journalRepository = journalRepository;
     }
 
-    public List<Journal> getAllJournals() {
-        return journalRepository.findAll();
+    public List<Journal> getAllJournals(String userId) {
+        List<Journal> journals = journalRepository.findAll();
+
+        // Log the fetched journals and userId
+        System.out.println("Fetched journals: " + journals.toString());
+        System.out.println("UserId passed: " + userId);
+
+//        List<Journal> filteredJournals = journals.stream()
+//                .filter(journal -> journal.getUserId() != null && j.getUserId().equals(userId))
+//                .collect(Collectors.toList());
+
+
+        List<Journal> filteredJournals = journals.stream().filter(journal -> journal.getUserId().equals(userId)).collect(Collectors.toList());
+
+        // Log the filtered results
+        System.out.println("Filtered journals: " + filteredJournals);
+
+        return filteredJournals;
     }
+
 
     public Optional<Journal> getJournalById(String id) {
         return journalRepository.findById(id);

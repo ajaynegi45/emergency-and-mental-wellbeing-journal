@@ -1,5 +1,6 @@
 package com.ajaynegi.JournalFeature.model;
 
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,7 +13,10 @@ public class Journal {
     private String id;
     private String title;
     private String content;
+
+    @NotEmpty(message = "UserId is nor present")
     private String userId;
+
     private LocalDateTime createdAt;
 
     public Journal() {
@@ -64,6 +68,17 @@ public class Journal {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Journal{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userId='" + userId + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }
 

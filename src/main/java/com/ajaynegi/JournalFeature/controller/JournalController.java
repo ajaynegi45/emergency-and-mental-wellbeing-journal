@@ -24,8 +24,11 @@ public class JournalController {
 
     // Fetch all journals
     @GetMapping
-    public ResponseEntity<List<Journal>> getAllJournals() {
-        return ResponseEntity.ok(journalService.getAllJournals());
+    public ResponseEntity<List<Journal>> getAllJournals(@RequestHeader("userId") String userId) {
+        System.out.println(userId);
+        List<Journal> journals = journalService.getAllJournals(userId);
+        System.out.println(journals);
+        return ResponseEntity.ok(journals);
     }
 
     // Fetch a specific journal by ID
